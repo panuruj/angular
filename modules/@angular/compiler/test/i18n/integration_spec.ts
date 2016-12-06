@@ -59,14 +59,17 @@ export function main() {
       tb.detectChanges();
       expect(el.query(By.css('#i18n-7')).nativeElement).toHaveText('un');
       expect(el.query(By.css('#i18n-14')).nativeElement).toHaveText('un');
+      expect(el.query(By.css('#i18n-17')).nativeElement).toHaveText('un');
       cmp.count = 2;
       tb.detectChanges();
       expect(el.query(By.css('#i18n-7')).nativeElement).toHaveText('deux');
       expect(el.query(By.css('#i18n-14')).nativeElement).toHaveText('deux');
+      expect(el.query(By.css('#i18n-17')).nativeElement).toHaveText('deux');
       cmp.count = 3;
       tb.detectChanges();
       expect(el.query(By.css('#i18n-7')).nativeElement).toHaveText('beaucoup');
       expect(el.query(By.css('#i18n-14')).nativeElement).toHaveText('beaucoup');
+      expect(el.query(By.css('#i18n-17')).nativeElement).toHaveText('beaucoup');
 
       cmp.sex = 'm';
       cmp.sexB = 'f';
@@ -90,14 +93,17 @@ export function main() {
           .toEqual('<h1 id="i18n-12">Balises dans les commentaires html</h1>');
       expectHtml(el, '#i18n-13')
           .toBe('<div id="i18n-13" title="dans une section traductible"></div>');
-
       expectHtml(el, '#i18n-15').toMatch(/ca <b>devrait<\/b> marcher/);
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
       expectHtml(el, '#i18n-16').toMatch(/avec un ID explicite/);
       expectHtml(el, '#i18n-18')
           .toEqual('<div id="i18n-18">FOO<a title="dans une section traductible">BAR</a></div>');
 >>>>>>> 424e6c4... fix(i18n): translate attributes inside elements marked for translation
+=======
+      expectHtml(el, '#i18n-16').toMatch(/avec un ID explicite/);
+>>>>>>> 56c361f... test(compiler): test i18n explicit id
     });
   });
 }
@@ -147,6 +153,8 @@ function expectHtml(el: DebugElement, cssSelector: string): any {
 <!-- /i18n -->
 
 <div id="i18n-15"><ng-container i18n>it <b>should</b> work</ng-container></div>
+<div id="i18n-16" i18n="@@i18n16">with an explicit ID</div>
+<div id="i18n-17" i18n="@@i18n17">{count, plural, =0 {zero} =1 {one} =2 {two} other {<b>many</b>}}</div>
 `
 })
 class I18nComponent {
@@ -191,12 +199,15 @@ const XTB = `
   <translation id="i18n16">avec un ID explicite</translation>
   <translation id="i18n17">{VAR_PLURAL, plural, =0 {zero} =1 {un} =2 {deux} other {<ph 
   name="START_BOLD_TEXT"><ex>&lt;b&gt;</ex></ph>beaucoup<ph name="CLOSE_BOLD_TEXT"><ex>&lt;/b&gt;</ex></ph>} }</translation>
+<<<<<<< HEAD
   <translation id="4085484936881858615">{VAR_PLURAL, plural, =0 {Pas de réponse} =1 {une réponse} other {<ph name="INTERPOLATION"><ex>INTERPOLATION</ex></ph> réponse} }</translation>
   <translation id="4035252431381981115">FOO<ph name="START_LINK"><ex>&lt;a&gt;</ex></ph>BAR<ph name="CLOSE_LINK"><ex>&lt;/a&gt;</ex></ph></translation>
 <<<<<<< HEAD
   <translation id="5339604010413301604"><ph name="MAP_NAME"><ex>MAP_NAME</ex></ph></translation>
 =======
 >>>>>>> 424e6c4... fix(i18n): translate attributes inside elements marked for translation
+=======
+>>>>>>> 56c361f... test(compiler): test i18n explicit id
 </translationbundle>`;
 
 // unused, for reference only
@@ -227,6 +238,7 @@ const XMB = `
   <msg id="1491627405349178954">it <ph name="START_BOLD_TEXT"><ex>&lt;b&gt;</ex></ph>should<ph name="CLOSE_BOLD_TEXT"><ex>&lt;/b&gt;</ex></ph> work</msg>
   <msg id="i18n16">with an explicit ID</msg>
   <msg id="i18n17">{VAR_PLURAL, plural, =0 {zero} =1 {one} =2 {two} other {<ph name="START_BOLD_TEXT"><ex>&lt;b&gt;</ex></ph>many<ph name="CLOSE_BOLD_TEXT"><ex>&lt;/b&gt;</ex></ph>} }</msg>
+<<<<<<< HEAD
   <msg id="4085484936881858615" desc="desc">{VAR_PLURAL, plural, =0 {Found no results} =1 {Found one result} other {Found <ph name="INTERPOLATION"><ex>INTERPOLATION</ex></ph> results} }</msg>
   <msg id="4035252431381981115">foo<ph name="START_LINK"><ex>&lt;a&gt;</ex></ph>bar<ph name="CLOSE_LINK"><ex>&lt;/a&gt;</ex></ph></msg>`;
 
@@ -285,4 +297,7 @@ const HTML = `
 <div i18n>{{ 'test' //i18n(ph="map name") }}</div>
 =======
 >>>>>>> 424e6c4... fix(i18n): translate attributes inside elements marked for translation
+=======
+</messagebundle>
+>>>>>>> 56c361f... test(compiler): test i18n explicit id
 `;

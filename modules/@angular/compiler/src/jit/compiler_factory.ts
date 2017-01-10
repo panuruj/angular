@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {COMPILER_OPTIONS, Compiler, CompilerFactory, CompilerOptions, Inject, Optional, PLATFORM_INITIALIZER, PlatformRef, Provider, ReflectiveInjector, TRANSLATIONS, TRANSLATIONS_FORMAT, Type, ViewEncapsulation, createPlatformFactory, isDevMode, platformCore} from '@angular/core';
+import {COMPILER_OPTIONS, Compiler, CompilerFactory, CompilerOptions, Inject, MISSING_TRANSLATION_STRATEGY, MissingTranslationStrategy, Optional, PLATFORM_INITIALIZER, PlatformRef, Provider, ReflectiveInjector, TRANSLATIONS, TRANSLATIONS_FORMAT, Type, ViewEncapsulation, createPlatformFactory, isDevMode, platformCore} from '@angular/core';
 
 import {AnimationParser} from '../animation/animation_parser';
 import {CompilerConfig} from '../config';
@@ -55,12 +55,15 @@ export const COMPILER_PROVIDERS: Array<any|Type<any>|{[k: string]: any}|any[]> =
   HtmlParser,
   {
     provide: i18n.I18NHtmlParser,
-    useFactory: (parser: HtmlParser, translations: string, format: string) =>
-                    new i18n.I18NHtmlParser(parser, translations, format),
+    useFactory:
+        (parser: HtmlParser, translations: string, format: string,
+         missingTranslationStrategy: MissingTranslationStrategy) =>
+            new i18n.I18NHtmlParser(parser, translations, format, missingTranslationStrategy),
     deps: [
       HtmlParser,
       [new Optional(), new Inject(TRANSLATIONS)],
       [new Optional(), new Inject(TRANSLATIONS_FORMAT)],
+      [new Optional(), new Inject(MISSING_TRANSLATION_STRATEGY)],
     ]
   },
   TemplateParser,

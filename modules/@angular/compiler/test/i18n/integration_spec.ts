@@ -220,8 +220,7 @@ const XMB = `
   <msg id="i18n17">{VAR_PLURAL, plural, =0 {zero} =1 {one} =2 {two} other {<ph name="START_BOLD_TEXT"><ex>&lt;b&gt;</ex></ph>many<ph name="CLOSE_BOLD_TEXT"><ex>&lt;/b&gt;</ex></ph>} }</msg>
   <msg id="4085484936881858615" desc="desc">{VAR_PLURAL, plural, =0 {Found no results} =1 {Found one result} other {Found <ph name="INTERPOLATION"><ex>INTERPOLATION</ex></ph> results} }</msg>
   <msg id="4035252431381981115">foo<ph name="START_LINK"><ex>&lt;a&gt;</ex></ph>bar<ph name="CLOSE_LINK"><ex>&lt;/a&gt;</ex></ph></msg>
-  <msg id="5339604010413301604"><ph name="MAP_NAME"><ex>MAP_NAME</ex></ph></msg>;
-</messagebundle>`;
+  <msg id="5339604010413301604"><ph name="MAP_NAME"><ex>MAP_NAME</ex></ph></msg>`;
 
 const HTML = `
 <div>

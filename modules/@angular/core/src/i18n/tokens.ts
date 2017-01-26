@@ -26,11 +26,6 @@ export const TRANSLATIONS_FORMAT = new OpaqueToken('TranslationsFormat');
 /**
  * @experimental i18n support is experimental.
  */
-export const MISSING_TRANSLATION_STRATEGY = new OpaqueToken('MissingTranslationStrategy');
-
-/**
- * @experimental i18n support is experimental.
- */
 export enum MissingTranslationStrategy {
   Error,
   Warning,

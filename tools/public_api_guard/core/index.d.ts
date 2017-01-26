@@ -253,6 +253,7 @@ export declare type CompilerOptions = {
     useJit?: boolean;
     defaultEncapsulation?: ViewEncapsulation;
     providers?: any[];
+    missingTranslation?: MissingTranslationStrategy;
 };
 
 /** @stable */
@@ -579,9 +580,6 @@ export declare class KeyValueDiffers {
 
 /** @experimental */
 export declare const LOCALE_ID: OpaqueToken;
-
-/** @experimental */
-export declare const MISSING_TRANSLATION_STRATEGY: OpaqueToken;
 
 /** @experimental */
 export declare enum MissingTranslationStrategy {

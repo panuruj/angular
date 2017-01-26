@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {COMPILER_OPTIONS, Compiler, CompilerFactory, CompilerOptions, Inject, MISSING_TRANSLATION_STRATEGY, MissingTranslationStrategy, Optional, PLATFORM_INITIALIZER, PlatformRef, Provider, ReflectiveInjector, TRANSLATIONS, TRANSLATIONS_FORMAT, Type, ViewEncapsulation, createPlatformFactory, isDevMode, platformCore} from '@angular/core';
+import {COMPILER_OPTIONS, Compiler, CompilerFactory, CompilerOptions, Inject, MissingTranslationStrategy, Optional, PLATFORM_INITIALIZER, PlatformRef, Provider, ReflectiveInjector, TRANSLATIONS, TRANSLATIONS_FORMAT, Type, ViewEncapsulation, createPlatformFactory, isDevMode, platformCore} from '@angular/core';
 
 import {AnimationParser} from '../animation/animation_parser';
 import {CompilerConfig} from '../config';
@@ -55,15 +55,16 @@ export const COMPILER_PROVIDERS: Array<any|Type<any>|{[k: string]: any}|any[]> =
   HtmlParser,
   {
     provide: i18n.I18NHtmlParser,
-    useFactory:
-        (parser: HtmlParser, translations: string, format: string,
-         missingTranslationStrategy: MissingTranslationStrategy) =>
-            new i18n.I18NHtmlParser(parser, translations, format, missingTranslationStrategy),
+    useFactory: (parser: HtmlParser, translations: string, format: string, config: CompilerConfig,
+                 console: Console) =>
+                    new i18n.I18NHtmlParser(
+                        parser, translations, format, config.missingTranslation, console),
     deps: [
       HtmlParser,
       [new Optional(), new Inject(TRANSLATIONS)],
       [new Optional(), new Inject(TRANSLATIONS_FORMAT)],
-      [new Optional(), new Inject(MISSING_TRANSLATION_STRATEGY)],
+      [CompilerConfig],
+      [Console],
     ]
   },
   TemplateParser,
@@ -83,7 +84,7 @@ export const COMPILER_PROVIDERS: Array<any|Type<any>|{[k: string]: any}|any[]> =
   DirectiveResolver,
   PipeResolver,
   NgModuleResolver,
-  AnimationParser
+  AnimationParser,
 ];
 
 
@@ -94,11 +95,12 @@ export class JitCompilerFactory implements CompilerFactory {
     this._defaultOptions = [<CompilerOptions>{
                              useDebug: isDevMode(),
                              useJit: true,
-                             defaultEncapsulation: ViewEncapsulation.Emulated
+                             defaultEncapsulation: ViewEncapsulation.Emulated,
+                             missingTranslation: MissingTranslationStrategy.Warning,
                            }].concat(defaultOptions);
   }
   createCompiler(options: CompilerOptions[] = []): Compiler {
-    const mergedOptions = _mergeOptions(this._defaultOptions.concat(options));
+    const opts = _mergeOptions(this._defaultOptions.concat(options));
     const injector = ReflectiveInjector.resolveAndCreate([
       COMPILER_PROVIDERS, {
         provide: CompilerConfig,
@@ -106,19 +108,20 @@ export class JitCompilerFactory implements CompilerFactory {
           return new CompilerConfig({
             // let explicit values from the compiler options overwrite options
             // from the app providers. E.g. important for the testing platform.
-            genDebugInfo: mergedOptions.useDebug,
+            genDebugInfo: opts.useDebug,
             // let explicit values from the compiler options overwrite options
             // from the app providers
-            useJit: mergedOptions.useJit,
+            useJit: opts.useJit,
             // let explicit values from the compiler options overwrite options
             // from the app providers
-            defaultEncapsulation: mergedOptions.defaultEncapsulation,
-            logBindingUpdate: mergedOptions.useDebug
+            defaultEncapsulation: opts.defaultEncapsulation,
+            logBindingUpdate: opts.useDebug,
+            missingTranslation: opts.missingTranslation,
           });
         },
         deps: []
       },
-      mergedOptions.providers
+      opts.providers
     ]);
     return injector.get(Compiler);
   }
@@ -144,7 +147,8 @@ function _mergeOptions(optionsArr: CompilerOptions[]): CompilerOptions {
     useDebug: _lastDefined(optionsArr.map(options => options.useDebug)),
     useJit: _lastDefined(optionsArr.map(options => options.useJit)),
     defaultEncapsulation: _lastDefined(optionsArr.map(options => options.defaultEncapsulation)),
-    providers: _mergeArrays(optionsArr.map(options => options.providers))
+    providers: _mergeArrays(optionsArr.map(options => options.providers)),
+    missingTranslation: _lastDefined(optionsArr.map(options => options.missingTranslation)),
   };
 }
 

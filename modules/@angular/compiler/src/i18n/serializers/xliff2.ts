@@ -8,7 +8,7 @@
 
 import * as ml from '../../ml_parser/ast';
 import {XmlParser} from '../../ml_parser/xml_parser';
-import {digest} from '../digest';
+import {decimalDigest} from '../digest';
 import * as i18n from '../i18n_ast';
 import {I18nError} from '../parse_util';
 
@@ -27,21 +27,14 @@ const _SOURCE_TAG = 'source';
 const _TARGET_TAG = 'target';
 const _UNIT_TAG = 'unit';
 
-// hhttp://docs.oasis-open.org/xliff/xliff-core/v2.0/os/xliff-core-v2.0-os.html
+// http://docs.oasis-open.org/xliff/xliff-core/v2.0/os/xliff-core-v2.0-os.html
 export class Xliff2 extends Serializer {
   write(messages: i18n.Message[]): string {
     const visitor = new _WriteVisitor();
-    const visited: {[id: string]: boolean} = {};
     const units: xml.Node[] = [];
 
     messages.forEach(message => {
-      const id = this.digest(message);
-
-      // deduplicate messages
-      if (visited[id]) return;
-      visited[id] = true;
-
-      const unit = new xml.Tag(_UNIT_TAG, {id});
+      const unit = new xml.Tag(_UNIT_TAG, {id: message.id});
 
       if (message.description || message.meaning) {
         const notes = new xml.Tag('notes');
@@ -107,7 +100,7 @@ export class Xliff2 extends Serializer {
     return i18nNodesByMsgId;
   }
 
-  digest(message: i18n.Message): string { return digest(message); }
+  digest(message: i18n.Message): string { return decimalDigest(message); }
 }
 
 class _WriteVisitor implements i18n.Visitor {

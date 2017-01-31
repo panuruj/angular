@@ -26,12 +26,12 @@ const HTML = `
 const WRITE_XLIFF = `<?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
   <file original="ng.template" id="ngi18n">
-    <unit id="983775b9a51ce14b036be72d4cfd65d68d64e231">
+    <unit id="1933478729560469763">
       <segment>
         <source>translatable attribute</source>
       </segment>
     </unit>
-    <unit id="ec1d033f2436133c14ab038286c4f5df4697484a">
+    <unit id="7056919470098446707">
       <segment>
         <source>translatable element <pc id="0" equivStart="START_BOLD_TEXT" equivEnd="CLOSE_BOLD_TEXT" type="fmt" dispStart="&lt;b&gt;" dispEnd="&lt;/b&gt;">with placeholders</pc> <ph id="1" equiv="INTERPOLATION" disp="{{ interpolation}}"/></source>
       </segment>
@@ -45,7 +45,7 @@ const WRITE_XLIFF = `<?xml version="1.0" encoding="UTF-8" ?>
         <source>foo</source>
       </segment>
     </unit>
-    <unit id="6766186b23e26e46114f5b05a263c1aa2aae08bc">
+    <unit id="6440235004920703622">
       <notes>
         <note category="description">nested</note>
       </notes>
@@ -53,7 +53,7 @@ const WRITE_XLIFF = `<?xml version="1.0" encoding="UTF-8" ?>
         <source><pc id="0" equivStart="START_BOLD_TEXT" equivEnd="CLOSE_BOLD_TEXT" type="fmt" dispStart="&lt;b&gt;" dispEnd="&lt;/b&gt;"><pc id="1" equivStart="START_UNDERLINED_TEXT" equivEnd="CLOSE_UNDERLINED_TEXT" type="fmt" dispStart="&lt;u&gt;" dispEnd="&lt;/u&gt;"><ph id="2" equiv="INTERPOLATION" disp="{{interpolation}}"/> Text</pc></pc></source>
       </segment>
     </unit>
-    <unit id="5111eec79a97de6b483081a9a4258fa50e252b02">
+    <unit id="8779402634269838862">
       <notes>
         <note category="description">ph names</note>
       </notes>
@@ -61,7 +61,7 @@ const WRITE_XLIFF = `<?xml version="1.0" encoding="UTF-8" ?>
         <source><ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br/&gt;"/><ph id="1" equiv="TAG_IMG" type="image" disp="&lt;img/&gt;"/><ph id="2" equiv="TAG_IMG_1" type="image" disp="&lt;img/&gt;"/></source>
       </segment>
     </unit>
-    <unit id="52e40be15fbdc88ac4ce36b63899b88d779022ba">
+    <unit id="6536355551500405293">
       <notes>
         <note category="description">empty element</note>
       </notes>
@@ -76,19 +76,19 @@ const WRITE_XLIFF = `<?xml version="1.0" encoding="UTF-8" ?>
 const LOAD_XLIFF = `<?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en" trgLang="fr">
   <file original="ng.template" id="ngi18n">
-    <unit id="983775b9a51ce14b036be72d4cfd65d68d64e231">
+    <unit id="1933478729560469763">
       <segment>
         <source>translatable attribute</source>
         <target>etubirtta elbatalsnart</target>
       </segment>
     </unit>
-    <unit id="ec1d033f2436133c14ab038286c4f5df4697484a">
+    <unit id="7056919470098446707">
       <segment>
         <source>translatable element <pc id="0" equivStart="START_BOLD_TEXT" equivEnd="CLOSE_BOLD_TEXT" type="fmt" dispStart="&lt;b&gt;" dispEnd="&lt;/b&gt;">with placeholders</pc> <ph id="1" equiv="INTERPOLATION" disp="{{ interpolation}}"/></source>
         <target><ph id="1" equiv="INTERPOLATION" disp="{{ interpolation}}"/> <pc id="0" equivStart="START_BOLD_TEXT" equivEnd="CLOSE_BOLD_TEXT" type="fmt" dispStart="&lt;b&gt;" dispEnd="&lt;/b&gt;">sredlohecalp htiw</pc> tnemele elbatalsnart</target>
       </segment>
     </unit>
-    <unit id="db3e0a6a5a96481f60aec61d98c3eecddef5ac23">
+    <unit id="i">
       <notes>
         <note category="description">d</note>
         <note category="meaning">m</note>
@@ -98,7 +98,7 @@ const LOAD_XLIFF = `<?xml version="1.0" encoding="UTF-8" ?>
         <target>oof</target>
       </segment>
     </unit>
-    <unit id="6766186b23e26e46114f5b05a263c1aa2aae08bc">
+    <unit id="6440235004920703622">
       <notes>
         <note category="description">nested</note>
       </notes>
@@ -107,7 +107,7 @@ const LOAD_XLIFF = `<?xml version="1.0" encoding="UTF-8" ?>
         <target><pc id="0" equivStart="START_BOLD_TEXT" equivEnd="CLOSE_BOLD_TEXT" type="fmt" dispStart="&lt;b&gt;" dispEnd="&lt;/b&gt;"><pc id="1" equivStart="START_UNDERLINED_TEXT" equivEnd="CLOSE_UNDERLINED_TEXT" type="fmt" dispStart="&lt;u&gt;" dispEnd="&lt;/u&gt;">txeT <ph id="2" equiv="INTERPOLATION" disp="{{interpolation}}"/></pc></pc></target>
       </segment>
     </unit>
-    <unit id="5111eec79a97de6b483081a9a4258fa50e252b02">
+    <unit id="8779402634269838862">
       <notes>
         <note category="description">ph names</note>
       </notes>
@@ -116,7 +116,7 @@ const LOAD_XLIFF = `<?xml version="1.0" encoding="UTF-8" ?>
         <target><ph id="2" equiv="TAG_IMG_1" type="image" disp="&lt;img/&gt;"/><ph id="1" equiv="TAG_IMG" type="image" disp="&lt;img/&gt;"/><ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br/&gt;"/></target>
       </segment>
     </unit>
-    <unit id="52e40be15fbdc88ac4ce36b63899b88d779022ba">
+    <unit id="6536355551500405293">
       <notes>
         <note category="description">empty element</note>
       </notes>
@@ -157,16 +157,15 @@ export function main(): void {
     describe('load', () => {
       it('should load XLIFF files', () => {
         expect(loadAsMap(LOAD_XLIFF)).toEqual({
-          '983775b9a51ce14b036be72d4cfd65d68d64e231': 'etubirtta elbatalsnart',
-          'ec1d033f2436133c14ab038286c4f5df4697484a':
+          '1933478729560469763': 'etubirtta elbatalsnart',
+          '7056919470098446707':
               '<ph name="INTERPOLATION"/> <ph name="START_BOLD_TEXT"/>sredlohecalp htiw<ph name="CLOSE_BOLD_TEXT"/> tnemele elbatalsnart',
-          'db3e0a6a5a96481f60aec61d98c3eecddef5ac23': 'oof',
-          '6766186b23e26e46114f5b05a263c1aa2aae08bc':
+          'i': 'oof',
+          '6440235004920703622':
               '<ph name="START_BOLD_TEXT"/><ph name="START_UNDERLINED_TEXT"/>txeT <ph name="INTERPOLATION"/><ph name="CLOSE_UNDERLINED_TEXT"/><ph name="CLOSE_BOLD_TEXT"/>',
-          '5111eec79a97de6b483081a9a4258fa50e252b02':
+          '8779402634269838862':
               '<ph name="TAG_IMG_1"/><ph name="TAG_IMG"/><ph name="LINE_BREAK"/>',
-          '52e40be15fbdc88ac4ce36b63899b88d779022ba':
-              '<ph name="START_TAG_SPAN"/><ph name="CLOSE_TAG_SPAN"/> olleh'
+          '6536355551500405293': '<ph name="START_TAG_SPAN"/><ph name="CLOSE_TAG_SPAN"/> olleh'
         });
       });
     });

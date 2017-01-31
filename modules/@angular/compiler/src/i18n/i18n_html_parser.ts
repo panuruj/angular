@@ -63,7 +63,7 @@ export class I18NHtmlParser implements HtmlParser {
         return new Xmb();
       case 'xtb':
         return new Xtb();
-      case 'xliff2':
+      case 'xlf2':
         return new Xliff2();
       case 'xliff':
       case 'xlf':

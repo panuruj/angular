@@ -27,14 +27,14 @@ export class Extractor {
       public host: ts.CompilerHost, private ngCompilerHost: CompilerHost,
       private program: ts.Program) {}
 
-  extract(formatName: string): Promise<void> {
+  extract(format: string): Promise<void> {
     // Checks the format and returns the extension
-    const ext = this.getExtension(formatName);
+    const ext = this.getExtension(format);
 
     const promiseBundle = this.extractBundle();
 
     return promiseBundle.then(bundle => {
-      const content = this.serialize(bundle, formatName);
+      const content = this.serialize(bundle, format);
       const dstPath = path.join(this.options.genDir, `messages.${ext}`);
       this.host.writeFile(dstPath, content, false);
     });
@@ -55,7 +55,7 @@ export class Extractor {
       case 'xmb':
         serializer = new compiler.Xmb();
         break;
-      case 'xliff2':
+      case 'xlf2':
         serializer = new compiler.Xliff2();
         break;
       case 'xlf':
@@ -71,7 +71,7 @@ export class Extractor {
     const format = (formatName || 'xlf').toLowerCase();
 
     if (format === 'xmb') return 'xmb';
-    if (format === 'xlf' || format === 'xliff' || format === 'xliff2') return 'xlf';
+    if (format === 'xlf' || format === 'xliff' || format === 'xlf2') return 'xlf';
 
     throw new Error(`Unsupported format "${formatName}"`);
   }
